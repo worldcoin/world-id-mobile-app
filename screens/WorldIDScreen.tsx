@@ -1,5 +1,6 @@
 import { ImageBackground, ScrollView, StyleSheet } from "react-native";
 import Button from "../components/Button";
+import { CredentialCard } from "../components/CredentialCard";
 import Tag from "../components/Tag";
 import { Text, View } from "../components/Themed";
 import {
@@ -103,16 +104,12 @@ export default function WorldIDScreen({
         </View>
       </ImageBackground>
       <View style={styles.mainContainer}>
-        <Text style={{ ...h3Style, color: textDefault }}>
-          Complete your profile
-        </Text>
-        <Text style={{ color: textSecondary, paddingTop: 4, fontSize: fontMd }}>
-          Keep adding credentials to reach higher profile level.
-        </Text>
         <Text style={{ ...h3Style, color: textDefault, paddingTop: 32 }}>
           Credentials
         </Text>
-        <ScrollView></ScrollView>
+        <ScrollView style={{ paddingHorizontal: 8, paddingTop: 16 }}>
+          <CredentialCard />
+        </ScrollView>
       </View>
     </View>
   );

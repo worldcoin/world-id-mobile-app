@@ -14,6 +14,18 @@ export const fontSm = 14;
 // Borders
 export const borderRadius = 12;
 
+// Elevation
+export const elevation5 = {
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+  elevation: 5,
+};
+
 export const h1Style: TextStyle = {
   fontSize: 30,
   fontWeight: "bold",
