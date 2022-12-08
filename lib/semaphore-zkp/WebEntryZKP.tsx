@@ -4,7 +4,8 @@ import {
   emit,
   useNativeMessage,
 } from "react-native-react-bridge/lib/web";
-import { getFullProof } from "./semaphore-proof";
+//import { getFullProof } from "./semaphore-proof";
+import { Strategy, ZkIdentity } from "@zk-kit/identity";
 
 const Root = () => {
   const identity = {
@@ -85,14 +86,16 @@ const Root = () => {
   // useNativeMessage hook receives message from React Native
   useNativeMessage(async (message) => {
     if (message.type === "zkp_request") {
-      const fullProof = await getFullProof(
-        identity,
-        merkleProof,
-        "wld_1234",
-        "123"
-      );
-      console.log(fullProof);
-      emit({ type: "zkp_response", data: { proof: 345, fullProof } });
+      const identity = new ZkIdentity(Strategy.RANDOM);
+      //const identity = 1;
+      // const fullProof = await getFullProof(
+      //   identity,
+      //   merkleProof,
+      //   "wld_1234",
+      //   "123"
+      // );
+      // console.log(fullProof);
+      emit({ type: "zkp_response", data: { proof: 345, identity } });
     }
   });
   return <></>;

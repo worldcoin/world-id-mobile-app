@@ -14,5 +14,9 @@ module.exports = {
   resolver: {
     ...config.resolver,
     sourceExts: ["jsx", "js", "ts", "tsx", "cjs", "json"],
+    // extraNodeModules: {
+    //   ...config.resolver.extraNodeModules,
+    //   ...require("node-libs-react-native"),
+    // },
   },
 };
