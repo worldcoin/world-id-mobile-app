@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from "react-native";
-import { white } from "../styles";
+import { fontSm, white } from "../styles";
 
 const styles = StyleSheet.create({
   tagContainer: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 export default function Tag({ label }: { label: string }) {
   return (
     <View style={styles.tagContainer}>
-      <Text style={{ color: white }}>{label}</Text>
+      <Text style={{ color: white, fontSize: fontSm }}>{label}</Text>
     </View>
   );
 }

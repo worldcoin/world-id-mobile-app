@@ -1,8 +1,17 @@
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, ScrollView, StyleSheet } from "react-native";
 import Button from "../components/Button";
 import Tag from "../components/Tag";
 import { Text, View } from "../components/Themed";
-import { fontLg, h1Style, white } from "../styles";
+import {
+  borderRadius,
+  fontLg,
+  fontMd,
+  h1Style,
+  h3Style,
+  textDefault,
+  textSecondary,
+  white,
+} from "../styles";
 import { RootTabScreenProps } from "../types";
 const constellation = require("../assets/images/constellation.png");
 const profilePicPolygon = require("../assets/images/profile-pic-polygon.png");
@@ -15,7 +24,7 @@ const styles = StyleSheet.create({
   heroContainer: {
     paddingTop: 84,
     width: "100%",
-    paddingBottom: 16,
+    paddingBottom: 48,
   },
   titleLine: {
     flex: 1,
@@ -24,7 +33,7 @@ const styles = StyleSheet.create({
   profilePictureWrapper: {
     backgroundColor: "transparent",
     alignItems: "center",
-    paddingTop: 16,
+    paddingTop: 32,
   },
   profilePictureContainer: {
     height: 104,
@@ -43,6 +52,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...h1Style,
+    paddingLeft: 32,
   },
   textId: {
     paddingTop: 4,
@@ -50,9 +60,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  levelContainer: {
+  levelTagContainer: {
     backgroundColor: "transparent",
     paddingTop: 8,
+  },
+  mainContainer: {
+    backgroundColor: white,
+    flex: 1,
+    width: "100%",
+    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: borderRadius,
+    paddingTop: 32,
+    paddingHorizontal: 32,
   },
 });
 
@@ -79,10 +98,22 @@ export default function WorldIDScreen({
           </ImageBackground>
         </View>
         <Text style={styles.textId}>#ALC2031</Text>
-        <View style={styles.levelContainer}>
+        <View style={styles.levelTagContainer}>
           <Tag label="LEVEL 1" />
         </View>
       </ImageBackground>
+      <View style={styles.mainContainer}>
+        <Text style={{ ...h3Style, color: textDefault }}>
+          Complete your profile
+        </Text>
+        <Text style={{ color: textSecondary, paddingTop: 4, fontSize: fontMd }}>
+          Keep adding credentials to reach higher profile level.
+        </Text>
+        <Text style={{ ...h3Style, color: textDefault, paddingTop: 32 }}>
+          Credentials
+        </Text>
+        <ScrollView></ScrollView>
+      </View>
     </View>
   );
 }
