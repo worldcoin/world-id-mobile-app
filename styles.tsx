@@ -2,9 +2,12 @@ import { TextStyle } from "react-native";
 
 // Colors
 export const grayDark6 = "#191C20";
+export const grayDark1 = "#F1F5F8";
 export const white = "#FFFFFF";
 export const textDefault = "#000";
 export const textSecondary = "#858494";
+export const gradientStart = "#FF6848";
+export const gradientEnd = "#4940E0";
 
 // Font sizes
 export const fontLg = 18;
@@ -15,6 +18,7 @@ export const fontSm = 14;
 export const borderRadius = 12;
 
 // Elevation
+// https://ethercreative.github.io/react-native-shadow-generator/
 export const elevation5 = {
   shadowColor: "#000",
   shadowOffset: {

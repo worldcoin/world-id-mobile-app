@@ -1,13 +1,16 @@
+import { LinearGradient } from "expo-linear-gradient";
+import { ReactNode } from "react";
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { fontMd } from "../styles";
+import { fontMd, gradientEnd, white } from "../styles";
+import { LinearGradientText } from "./LinearGradientText";
 
-export default function Button({
+export default function GradientButton({
   label,
-  variant = "primary",
+  image,
   onPress,
 }: {
   label: string;
-  variant?: "primary";
+  image?: ReactNode;
   onPress?: () => void;
 }) {
   return (
@@ -19,7 +22,16 @@ export default function Button({
         ]}
         onPress={() => onPress?.()}
       >
-        <Text style={styles.buttonLabel}>{label}</Text>
+        {image && <View style={styles.buttonIcon}>{image}</View>}
+        <LinearGradientText
+          colors={["#FF6848", "#EA374E"]}
+          text={label}
+          textStyle={{
+            fontSize: fontMd,
+            textTransform: "uppercase",
+            fontWeight: "bold",
+          }}
+        />
       </Pressable>
     </View>
   );
@@ -40,10 +52,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    backgroundColor: "#4940E0",
+    borderColor: gradientEnd,
+    borderWidth: 2,
   },
   buttonPressed: {
-    backgroundColor: "#3B32C3",
+    opacity: 0.7,
+  },
+  buttonHeroGradient: {
+    backgroundColor: white,
   },
   buttonIcon: {
     paddingRight: 8,

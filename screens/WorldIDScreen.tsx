@@ -1,12 +1,13 @@
-import { ImageBackground, ScrollView, StyleSheet } from "react-native";
-import Button from "../components/Button";
+import { ImageBackground, ScrollView, StyleSheet, Image } from "react-native";
 import { CredentialCard } from "../components/CredentialCard";
+import GradientButton from "../components/GradientButton";
 import Tag from "../components/Tag";
 import { Text, View } from "../components/Themed";
 import {
   borderRadius,
   fontLg,
   fontMd,
+  grayDark6,
   h1Style,
   h3Style,
   textDefault,
@@ -16,6 +17,7 @@ import {
 import { RootTabScreenProps } from "../types";
 const constellation = require("../assets/images/constellation.png");
 const profilePicPolygon = require("../assets/images/profile-pic-polygon.png");
+const scanQRIcon = require("../assets/images/scan-qr-icon.png");
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: fontLg,
     fontWeight: "bold",
     textAlign: "center",
+    color: white,
   },
   levelTagContainer: {
     backgroundColor: "transparent",
@@ -72,7 +75,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: borderRadius,
     borderTopRightRadius: borderRadius,
     paddingTop: 32,
-    paddingHorizontal: 32,
   },
 });
 
@@ -80,7 +82,7 @@ export default function WorldIDScreen({
   navigation,
 }: RootTabScreenProps<"WorldID">) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} lightColor={grayDark6} darkColor={grayDark6}>
       <ImageBackground
         source={constellation}
         style={styles.heroContainer}
@@ -104,11 +106,53 @@ export default function WorldIDScreen({
         </View>
       </ImageBackground>
       <View style={styles.mainContainer}>
-        <Text style={{ ...h3Style, color: textDefault, paddingTop: 32 }}>
+        <View style={{ paddingHorizontal: 32 }}>
+          <GradientButton
+            label="Scan QR code"
+            onPress={() => {}}
+            image={
+              <Image
+                source={scanQRIcon}
+                style={{ height: fontLg, width: fontLg }}
+              />
+            }
+          />
+        </View>
+        <Text
+          style={{
+            ...h3Style,
+            color: textDefault,
+            paddingTop: 32,
+            paddingHorizontal: 32,
+          }}
+        >
           Credentials
         </Text>
-        <ScrollView style={{ paddingHorizontal: 8, paddingTop: 16 }}>
-          <CredentialCard />
+        <ScrollView style={{ paddingTop: 16, marginTop: 8 }}>
+          <View style={{ paddingHorizontal: 32, paddingBottom: 32 }}>
+            <CredentialCard
+              name="Phone number"
+              caption="Add your phone number"
+              icon="phone-square"
+            />
+            <CredentialCard
+              name="Identity"
+              caption="Prove your age, country and more"
+              icon="id-card"
+            />
+            <CredentialCard
+              name="Orb by Worldcoin"
+              caption="Coming soon"
+              icon="user-check"
+              disabled
+            />
+            <CredentialCard
+              name="Device"
+              caption="Coming soon"
+              icon="mobile-alt"
+              disabled
+            />
+          </View>
         </ScrollView>
       </View>
     </View>
