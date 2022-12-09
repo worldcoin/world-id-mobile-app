@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode } from "react";
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { fontMd, gradientEnd, white } from "../styles";
+import { fontMd, gradientEnd, gradientStart, white } from "../styles";
 import { LinearGradientText } from "./LinearGradientText";
 
 export default function GradientButton({
@@ -15,24 +15,27 @@ export default function GradientButton({
 }) {
   return (
     <View style={styles.buttonContainer}>
-      <Pressable
-        style={({ pressed }) => [
-          styles.button,
-          pressed ? styles.buttonPressed : {},
-        ]}
-        onPress={() => onPress?.()}
+      <LinearGradient
+        colors={[gradientStart, gradientEnd]}
+        start={{ x: 0.0, y: 1.0 }}
+        end={{ x: 1.0, y: 1.0 }}
+        style={{
+          borderRadius: 11,
+        }}
       >
-        {image && <View style={styles.buttonIcon}>{image}</View>}
-        <LinearGradientText
-          colors={["#FF6848", "#EA374E"]}
-          text={label}
-          textStyle={{
-            fontSize: fontMd,
-            textTransform: "uppercase",
-            fontWeight: "bold",
-          }}
-        />
-      </Pressable>
+        <View style={styles.button}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.buttonInternal,
+              pressed ? styles.buttonPressed : {},
+            ]}
+            onPress={() => onPress?.()}
+          >
+            {image && <View style={styles.buttonIcon}>{image}</View>}
+            <LinearGradientText text={label} textStyle={styles.buttonLabel} />
+          </Pressable>
+        </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -47,25 +50,24 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    width: "100%",
-    height: "100%",
+    margin: 1,
+    flex: 1,
+    backgroundColor: white,
+  },
+  buttonInternal: {
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    borderColor: gradientEnd,
-    borderWidth: 2,
+    width: "100%",
+    height: "100%",
   },
   buttonPressed: {
     opacity: 0.7,
-  },
-  buttonHeroGradient: {
-    backgroundColor: white,
   },
   buttonIcon: {
     paddingRight: 8,
   },
   buttonLabel: {
-    color: "#fff",
     fontSize: fontMd,
     textTransform: "uppercase",
     fontWeight: "bold",

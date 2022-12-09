@@ -11,7 +11,6 @@ import { gradientEnd, gradientStart } from "../styles";
 interface Props {
   text: string;
   textStyle?: TextStyle;
-  colors: string[];
   start?: { x: number; y: number };
   end?: { x: number; y: number };
 }
