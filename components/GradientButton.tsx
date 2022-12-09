@@ -15,27 +15,36 @@ export default function GradientButton({
 }) {
   return (
     <View style={styles.buttonContainer}>
-      <LinearGradient
-        colors={[gradientStart, gradientEnd]}
-        start={{ x: 0.0, y: 1.0 }}
-        end={{ x: 1.0, y: 1.0 }}
-        style={{
-          borderRadius: 11,
-        }}
-      >
-        <View style={styles.button}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.buttonInternal,
+      <Pressable onPress={() => onPress?.()}>
+        {({ pressed }) => (
+          <LinearGradient
+            colors={[gradientStart, gradientEnd]}
+            start={{ x: 0.0, y: 1.0 }}
+            end={{ x: 1.0, y: 1.0 }}
+            style={[
+              {
+                borderRadius: 11,
+              },
               pressed ? styles.buttonPressed : {},
             ]}
-            onPress={() => onPress?.()}
           >
-            {image && <View style={styles.buttonIcon}>{image}</View>}
-            <LinearGradientText text={label} textStyle={styles.buttonLabel} />
-          </Pressable>
-        </View>
-      </LinearGradient>
+            <View style={styles.button}>
+              <View
+                style={[
+                  styles.buttonInternal,
+                  pressed ? styles.buttonPressed : {},
+                ]}
+              >
+                {image && <View style={styles.buttonIcon}>{image}</View>}
+                <LinearGradientText
+                  text={label}
+                  textStyle={styles.buttonLabel}
+                />
+              </View>
+            </View>
+          </LinearGradient>
+        )}
+      </Pressable>
     </View>
   );
 }
@@ -43,7 +52,6 @@ export default function GradientButton({
 const styles = StyleSheet.create({
   buttonContainer: {
     height: 54,
-    marginHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 3,
