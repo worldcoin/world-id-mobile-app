@@ -1,10 +1,13 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
+import { fontMd } from "../styles";
 
 export default function Button({
   label,
+  variant = "primary",
   onPress,
 }: {
   label: string;
+  variant?: "primary";
   onPress?: () => void;
 }) {
   return (
@@ -24,8 +27,7 @@ export default function Button({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
-    height: 68,
+    height: 54,
     marginHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -48,6 +50,8 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: fontMd,
+    textTransform: "uppercase",
+    fontWeight: "bold",
   },
 });
