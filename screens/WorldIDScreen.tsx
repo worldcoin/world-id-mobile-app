@@ -1,4 +1,11 @@
-import { ImageBackground, ScrollView, StyleSheet, Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Image,
+  Platform,
+} from "react-native";
 import { CredentialCard } from "../components/CredentialCard";
 import GradientButton from "../components/GradientButton";
 import Tag from "../components/Tag";
@@ -146,6 +153,8 @@ export default function WorldIDScreen({
           </View>
         </ScrollView>
       </View>
+      {/* Use a light status bar on iOS to account for the black background here */}
+      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </View>
   );
 }
