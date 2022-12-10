@@ -30,7 +30,11 @@ export interface ICredential {
   identityCommitment: string; // Semaphore identity
   identityNullifier: string; // Semaphore identity
   identityTrapdoor: string; // Semaphore identity
-  identitySecret?: string; // Semaphore identity
+}
+
+export interface ICredentialSecret {
+  type: Credentials;
+  identitySecret: string;
 }
 
 // ANCHOR: Navigation types

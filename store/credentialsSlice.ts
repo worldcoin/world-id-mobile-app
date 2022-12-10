@@ -17,20 +17,20 @@ interface IActionDeleteCredential {
 export const credentialsSlice = createSlice({
   name: "credentials",
   initialState: {
-    credentialList: [] as ICredential[],
+    list: [] as ICredential[],
   },
   reducers: {
     append: (state, action: PayloadAction<ActionAppendType>) => {
-      state.credentialList.push(action.payload.credential);
+      state.list.push(action.payload.credential);
     },
     updateAtIndex: (state, action: PayloadAction<ActionUpdateType>) => {
-      state.credentialList[action.payload.index] = action.payload.credential;
+      state.list[action.payload.index] = action.payload.credential;
     },
     deleteCredential: (
       state,
       action: PayloadAction<IActionDeleteCredential>
     ) => {
-      state.credentialList = state.credentialList.filter(
+      state.list = state.list.filter(
         (credential) => credential.type !== action.payload.credentialType
       );
     },

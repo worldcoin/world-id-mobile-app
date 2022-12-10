@@ -38,9 +38,7 @@ export default function CredentialScreen({
     params: { credentialType },
   },
 }: RootTabScreenProps<"Credential">) {
-  const credentials = useAppSelector(
-    (state) => state.credentials.credentialList
-  );
+  const credentials = useAppSelector((state) => state.credentials.list);
   const credential = credentials.find((c) => c.type === credentialType);
   const dispatch = useAppDispatch();
 
