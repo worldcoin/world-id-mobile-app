@@ -3,17 +3,8 @@ import { CredentialCard } from "../components/CredentialCard";
 import GradientButton from "../components/GradientButton";
 import Tag from "../components/Tag";
 import { Text, View } from "../components/Themed";
-import {
-  borderRadius,
-  fontLg,
-  fontMd,
-  grayDark6,
-  h1Style,
-  h3Style,
-  textDefault,
-  textSecondary,
-  white,
-} from "../styles";
+import Colors from "../constants/Colors";
+import { borderRadius, fontLg, h1Style, h3Style } from "../constants/Styles";
 import { Credentials, RootTabScreenProps } from "../types";
 const constellation = require("../assets/images/constellation.png");
 const profilePicPolygon = require("../assets/images/profile-pic-polygon.png");
@@ -55,21 +46,14 @@ const styles = StyleSheet.create({
   },
   title: {
     ...h1Style,
+    color: Colors.dark.text, // Background is always dark here
     paddingLeft: 32,
-  },
-  textId: {
-    paddingTop: 4,
-    fontSize: fontLg,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: white,
   },
   levelTagContainer: {
     backgroundColor: "transparent",
     paddingTop: 8,
   },
   mainContainer: {
-    backgroundColor: white,
     flex: 1,
     width: "100%",
     borderTopLeftRadius: borderRadius,
@@ -89,7 +73,7 @@ export default function WorldIDScreen({
   };
 
   return (
-    <View style={styles.container} lightColor={grayDark6} darkColor={grayDark6}>
+    <View style={styles.container} lightColor="#000" darkColor="#000">
       <ImageBackground
         source={constellation}
         style={styles.heroContainer}
@@ -107,7 +91,6 @@ export default function WorldIDScreen({
             </View>
           </ImageBackground>
         </View>
-        <Text style={styles.textId}>#ALC2031</Text>
         <View style={styles.levelTagContainer}>
           <Tag label="LEVEL 1" />
         </View>
@@ -128,7 +111,6 @@ export default function WorldIDScreen({
         <Text
           style={{
             ...h3Style,
-            color: textDefault,
             paddingTop: 32,
             paddingHorizontal: 32,
           }}

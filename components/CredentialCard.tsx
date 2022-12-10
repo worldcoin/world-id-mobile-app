@@ -1,12 +1,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import {
-  borderRadius,
-  elevation5,
-  grayDark1,
-  textSecondary,
-  white,
-} from "../styles";
+import { grayDark1, textSecondary, white } from "../constants/Colors";
+import { borderRadius, elevation5 } from "../constants/Styles";
 
 const styles = StyleSheet.create({
   card: {

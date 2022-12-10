@@ -17,7 +17,6 @@ import { ColorSchemeName } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import CredentialScreen from "../screens/CredentialScreen";
-import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import WorldIDScreen from "../screens/WorldIDScreen";
 import { RootStackParamList, RootTabParamList } from "../types";

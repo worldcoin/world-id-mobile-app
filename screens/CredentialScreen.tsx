@@ -8,17 +8,8 @@ import {
   updateCredentialRemoteState,
 } from "../store/credentialsSlice";
 import Button from "../components/Button";
-import {
-  danger,
-  fontLg,
-  fontMd,
-  h1Style,
-  success,
-  textDefault,
-  textSecondary,
-} from "../styles";
+import { fontLg, fontMd, h1Style } from "../constants/Styles";
 import { CREDENTIALS_LABELS } from "../const";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { createCredential, registerCredential } from "../logic/credentialLogic";
 import {
   appendCredentialSecret,
@@ -28,6 +19,8 @@ import Toast from "react-native-toast-message";
 import { useEffect } from "react";
 import Tag from "../components/Tag";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { danger, success, textSecondary } from "../constants/Colors";
+import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 
 const styles = StyleSheet.create({
   container: {

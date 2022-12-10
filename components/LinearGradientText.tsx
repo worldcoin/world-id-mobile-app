@@ -6,7 +6,7 @@ import React, { FC } from "react";
 import { Text, TextStyle, StyleSheet } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradientEnd, gradientStart } from "../styles";
+import { gradientEnd, gradientStart } from "../constants/Colors";
 
 interface Props {
   text: string;

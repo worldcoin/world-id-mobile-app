@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from "react-native";
-import { fontSm, white } from "../styles";
+import { white } from "../constants/Colors";
+import { fontSm } from "../constants/Styles";
 
 const styles = StyleSheet.create({
   tagContainer: {
