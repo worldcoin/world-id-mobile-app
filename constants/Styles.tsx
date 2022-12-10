@@ -1,16 +1,5 @@
 import { TextStyle } from "react-native";
 
-// Colors
-export const grayDark6 = "#191C20";
-export const grayDark1 = "#F1F5F8";
-export const white = "#FFFFFF";
-export const textDefault = "#000";
-export const textSecondary = "#858494";
-export const gradientStart = "#FF6848";
-export const gradientEnd = "#4940E0";
-export const success = "#00C313";
-export const danger = "#FF6848";
-
 // Font sizes
 export const fontLg = 18;
 export const fontMd = 16;
@@ -35,7 +24,6 @@ export const elevation5 = {
 export const h1Style: TextStyle = {
   fontSize: 30,
   fontWeight: "bold",
-  color: white,
   paddingLeft: 16,
   paddingRight: 16,
 };

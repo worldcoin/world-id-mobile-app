@@ -20,12 +20,6 @@ export enum CredentialStatus {
   Revoked = "revoked", // Removed from remote server
 }
 
-export interface ZKPRequest {
-  merkle_root: string;
-  action_id: string;
-  // identity
-}
-
 export interface ICredential {
   type: Credentials;
   status: CredentialStatus;
@@ -49,6 +43,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Credential: RootTabParamList["Credential"];
+  Apps: undefined;
   NotFound: undefined;
 };
 
@@ -57,7 +52,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   WorldID: undefined;
-  Settings: undefined;
+  Apps: undefined;
   Credential: { credentialType: Credentials };
 };
 

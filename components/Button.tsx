@@ -1,5 +1,5 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { fontMd } from "../styles";
+import { fontMd } from "../constants/Styles";
 
 export default function Button({
   label,
