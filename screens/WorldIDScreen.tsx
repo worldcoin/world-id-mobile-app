@@ -1,15 +1,8 @@
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Image,
-  Linking,
-} from "react-native";
+import { ImageBackground, ScrollView, StyleSheet, Image } from "react-native";
 import { CredentialCard } from "../components/CredentialCard";
 import GradientButton from "../components/GradientButton";
 import Tag from "../components/Tag";
 import { Text, View } from "../components/Themed";
-import { getDockCheckUrl } from "../logic/doc-check";
 import {
   borderRadius,
   fontLg,
@@ -88,10 +81,8 @@ const styles = StyleSheet.create({
 export default function WorldIDScreen({
   navigation,
 }: RootTabScreenProps<"WorldID">) {
-  // TODO: Move to more maintainable logic location
+  // TODO: Move to more maintainable logic
   const handleKYCCardPress = async () => {
-    // const url = await getDockCheckUrl("0x123");
-    // Linking.openURL(url);
     navigation.push("Credential", {
       credentialType: Credentials.Identity,
     });
@@ -147,15 +138,16 @@ export default function WorldIDScreen({
         <ScrollView style={{ paddingTop: 16, marginTop: 8 }}>
           <View style={{ paddingHorizontal: 32, paddingBottom: 32 }}>
             <CredentialCard
-              name="Phone number"
-              caption="Add your phone number"
-              icon="phone-square"
-            />
-            <CredentialCard
               name="Identity"
               caption="Prove your age, country and more"
               icon="id-card"
               onPress={handleKYCCardPress}
+            />
+            <CredentialCard
+              name="Phone number"
+              caption="Coming soon"
+              icon="phone-square"
+              disabled
             />
             <CredentialCard
               name="Orb by Worldcoin"

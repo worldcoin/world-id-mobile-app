@@ -54,7 +54,7 @@ export function CredentialCard({
   return (
     <Pressable
       style={[styles.card, disabled ? styles.disabledCard : null]}
-      onPress={() => onPress?.()}
+      onPress={() => !disabled && onPress?.()}
     >
       <View style={styles.centered}>
         <FontAwesome5

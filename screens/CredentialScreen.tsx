@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet } from "react-native";
+import { Linking, Platform, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { append, deleteCredential } from "../store/credentialsSlice";
@@ -12,6 +12,7 @@ import {
   appendCredentialSecret,
   deleteCredentialSecret,
 } from "../store/secureSlice";
+import { startLegalIdentity } from "../logic/legalIdentityLogic";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,10 +55,15 @@ export default function CredentialScreen({
     (c) => c.type === credentialType
   );
 
-  const handleAddCredential = () => {
+  const handleAddCredential = async () => {
     const { credential, credentialSecret } = createCredential(credentialType);
+
     dispatch(append({ credential }));
     dispatch(appendCredentialSecret({ credentialSecret }));
+
+    // TODO: Move to more maintainable logic
+    const url = await startLegalIdentity(credential.identityCommitment);
+    Linking.openURL(url);
   };
 
   const handleDeleteCredential = () => {
