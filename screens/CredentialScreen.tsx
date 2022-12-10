@@ -90,7 +90,9 @@ export default function CredentialScreen({
   );
 
   const handleAddCredential = async () => {
-    const { credential, credentialSecret } = createCredential(credentialType);
+    const { credential, credentialSecret } = await createCredential(
+      credentialType
+    );
 
     dispatch(append({ credential }));
     dispatch(appendCredentialSecret({ credentialSecret }));
@@ -153,7 +155,7 @@ export default function CredentialScreen({
                     ...styles.verificationIndicatorText,
                   }}
                 >
-                  Nov Verified
+                  Not Verified
                 </Text>
               </View>
             )}
