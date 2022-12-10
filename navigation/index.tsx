@@ -16,6 +16,7 @@ import { ColorSchemeName } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import CredentialScreen from "../screens/CredentialScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import WorldIDScreen from "../screens/WorldIDScreen";
@@ -56,8 +57,13 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+      <Stack.Group
+        screenOptions={{
+          presentation: "modal",
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Credential" component={CredentialScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

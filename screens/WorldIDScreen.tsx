@@ -14,7 +14,7 @@ import {
   textSecondary,
   white,
 } from "../styles";
-import { RootTabScreenProps } from "../types";
+import { Credentials, RootTabScreenProps } from "../types";
 const constellation = require("../assets/images/constellation.png");
 const profilePicPolygon = require("../assets/images/profile-pic-polygon.png");
 const scanQRIcon = require("../assets/images/scan-qr-icon.png");
@@ -81,6 +81,13 @@ const styles = StyleSheet.create({
 export default function WorldIDScreen({
   navigation,
 }: RootTabScreenProps<"WorldID">) {
+  // TODO: Move to more maintainable logic
+  const handleKYCCardPress = async () => {
+    navigation.push("Credential", {
+      credentialType: Credentials.Identity,
+    });
+  };
+
   return (
     <View style={styles.container} lightColor={grayDark6} darkColor={grayDark6}>
       <ImageBackground
@@ -131,14 +138,16 @@ export default function WorldIDScreen({
         <ScrollView style={{ paddingTop: 16, marginTop: 8 }}>
           <View style={{ paddingHorizontal: 32, paddingBottom: 32 }}>
             <CredentialCard
-              name="Phone number"
-              caption="Add your phone number"
-              icon="phone-square"
-            />
-            <CredentialCard
               name="Identity"
               caption="Prove your age, country and more"
               icon="id-card"
+              onPress={handleKYCCardPress}
+            />
+            <CredentialCard
+              name="Phone number"
+              caption="Coming soon"
+              icon="phone-square"
+              disabled
             />
             <CredentialCard
               name="Orb by Worldcoin"

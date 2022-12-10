@@ -8,6 +8,8 @@ export const textDefault = "#000";
 export const textSecondary = "#858494";
 export const gradientStart = "#FF6848";
 export const gradientEnd = "#4940E0";
+export const success = "#00C313";
+export const danger = "#FF6848";
 
 // Font sizes
 export const fontLg = 18;
