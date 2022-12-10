@@ -5,21 +5,49 @@ import {
   ICredential,
   ICredentialSecret,
 } from "../types";
+import { NativeModules } from "react-native";
+import * as Random from "expo-random";
+import * as Crypto from "expo-crypto";
 
-export const createCredential = (
+const { Semaphore } = NativeModules;
+
+export const createCredential = async (
   credentialType: Credentials
-): { credential: ICredential; credentialSecret: ICredentialSecret } => {
+): Promise<{
+  credential: ICredential;
+  credentialSecret: ICredentialSecret;
+}> => {
+  // TODO: Use single side and derive all secrets from it?
+  const seed = await Crypto.digestStringAsync(
+    Crypto.CryptoDigestAlgorithm.SHA256,
+    Random.getRandomBytes(32).toString()
+  );
+  console.log(seed);
+  let identityCommitment = "";
+
+  if (Semaphore) {
+    identityCommitment = Semaphore.generateIdentityCommitment(seed);
+  } else {
+    console.warn(
+      "Sempahore is not available, likely running on Expo Go, simulate identity commitment"
+    );
+    identityCommitment =
+      "0x" +
+      (await Crypto.digestStringAsync(
+        Crypto.CryptoDigestAlgorithm.SHA256,
+        Random.getRandomBytes(32).toString()
+      )); // Simulated identity commitment for Expo Go
+  }
+
   return {
     credential: {
       type: credentialType,
-      identityCommitment: `0x10b61db94c4c834e7dc00352a43359a0143e699715a3aebc975cb9082495b1b4`, // TODO
-      identityTrapdoor: "", // TODO: Bridge to @philzip's library
-      identityNullifier: "", // TODO
+      identityCommitment,
       status: CredentialStatus.Created,
     },
     credentialSecret: {
       type: credentialType,
-      identitySecret: `secret_${Math.random()}`,
+      identitySecret: seed,
     },
   };
 };
