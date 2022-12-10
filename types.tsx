@@ -24,9 +24,7 @@ export interface ICredential {
   type: Credentials;
   status: CredentialStatus;
   error_details?: string; // Remote error details registering a credential (e.g. phone number already registered)
-  identityCommitment: string; // Semaphore identity
-  identityNullifier: string; // Semaphore identity
-  identityTrapdoor: string; // Semaphore identity
+  identityCommitment: string;
 }
 export interface ICredentialSecret {
   type: Credentials;
