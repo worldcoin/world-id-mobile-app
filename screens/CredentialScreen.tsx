@@ -8,6 +8,10 @@ import { h1Style, textDefault, textSecondary } from "../styles";
 import { CREDENTIALS_LABELS } from "../const";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { createCredential } from "../logic/credentialLogic";
+import {
+  appendCredentialSecret,
+  deleteCredentialSecret,
+} from "../store/secureSlice";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,17 +42,27 @@ export default function CredentialScreen({
     params: { credentialType },
   },
 }: RootTabScreenProps<"Credential">) {
-  const credentials = useAppSelector((state) => state.credentials.list);
+  const credentials = useAppSelector((state) => state.main.credentials.list);
   const credential = credentials.find((c) => c.type === credentialType);
   const dispatch = useAppDispatch();
 
+  // FIXME: TMP to log
+  const credentialSecrets = useAppSelector(
+    (state) => state.secure.credentialSecrets
+  );
+  const credentialSecret = credentialSecrets.find(
+    (c) => c.type === credentialType
+  );
+
   const handleAddCredential = () => {
-    const credential = createCredential(credentialType);
+    const { credential, credentialSecret } = createCredential(credentialType);
     dispatch(append({ credential }));
+    dispatch(appendCredentialSecret({ credentialSecret }));
   };
 
   const handleDeleteCredential = () => {
     dispatch(deleteCredential({ credentialType }));
+    dispatch(deleteCredentialSecret({ credentialType }));
   };
 
   return (
@@ -64,6 +78,9 @@ export default function CredentialScreen({
       {credential ? (
         <View>
           <Text style={styles.caption}>{JSON.stringify(credential)}</Text>
+          <Text style={styles.caption}>
+            Secret: {JSON.stringify(credentialSecret)}
+          </Text>
           <Button label="Delete credential" onPress={handleDeleteCredential} />
         </View>
       ) : (

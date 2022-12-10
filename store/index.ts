@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import credentialsReducer from "./credentialsSlice";
+import secureReducer from "./secureSlice";
 import {
   persistReducer,
   persistStore,
@@ -11,21 +12,32 @@ import {
   REGISTER,
 } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import createSecureStorage from "./secureStore";
+
+const secureStorage = createSecureStorage();
 
 const persistConfig = {
-  key: "root",
+  key: "main",
   storage: AsyncStorage,
 };
 
-const persistedCredentialsReducer = persistReducer(
+const securePersistConfig = {
+  key: "secureStorage",
+  storage: secureStorage,
+};
+
+const mainReducer = persistReducer(
   persistConfig,
-  credentialsReducer
+  combineReducers({ credentials: credentialsReducer })
 );
 
+const rootReducer = combineReducers({
+  main: mainReducer,
+  secure: persistReducer(securePersistConfig, secureReducer),
+});
+
 export const store = configureStore({
-  reducer: {
-    credentials: persistedCredentialsReducer,
-  },
+  reducer: rootReducer,
   // See https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
