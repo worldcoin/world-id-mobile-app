@@ -1,19 +1,33 @@
 import { StatusBar } from "expo-status-bar";
 import { Linking, Platform, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import { append, deleteCredential } from "../store/credentialsSlice";
+import { CredentialStatus, RootTabScreenProps } from "../types";
+import {
+  append,
+  deleteCredential,
+  updateCredentialRemoteState,
+} from "../store/credentialsSlice";
 import Button from "../components/Button";
-import { h1Style, textDefault, textSecondary } from "../styles";
+import {
+  danger,
+  fontLg,
+  fontMd,
+  h1Style,
+  success,
+  textDefault,
+  textSecondary,
+} from "../styles";
 import { CREDENTIALS_LABELS } from "../const";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { createCredential } from "../logic/credentialLogic";
+import { createCredential, registerCredential } from "../logic/credentialLogic";
 import {
   appendCredentialSecret,
   deleteCredentialSecret,
 } from "../store/secureSlice";
-import { startLegalIdentity } from "../logic/legalIdentityLogic";
 import Toast from "react-native-toast-message";
+import { useEffect } from "react";
+import Tag from "../components/Tag";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +37,6 @@ const styles = StyleSheet.create({
   },
   title: {
     ...h1Style,
-    color: textDefault,
   },
   separator: {
     marginVertical: 16,
@@ -33,6 +46,22 @@ const styles = StyleSheet.create({
   noCredentialContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  credentialId: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: fontMd,
+  },
+  verificationIndicator: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 16,
+  },
+  verificationIndicatorText: {
+    fontWeight: "bold",
+    fontSize: fontLg,
+    paddingLeft: 4,
   },
   caption: {
     color: textSecondary,
@@ -47,6 +76,17 @@ export default function CredentialScreen({
   const credentials = useAppSelector((state) => state.main.credentials.list);
   const credential = credentials.find((c) => c.type === credentialType);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (credential?.identityCommitment) {
+      dispatch(
+        updateCredentialRemoteState({
+          type: credentialType,
+          identityCommitment: credential?.identityCommitment,
+        })
+      );
+    }
+  }, []);
 
   // FIXME: TMP to log
   const credentialSecrets = useAppSelector(
@@ -63,7 +103,7 @@ export default function CredentialScreen({
     dispatch(appendCredentialSecret({ credentialSecret }));
 
     // TODO: Move to more maintainable logic
-    const url = await startLegalIdentity(
+    const url = await registerCredential(
       credential.identityCommitment,
       credentialType
     );
@@ -89,11 +129,48 @@ export default function CredentialScreen({
 
       {credential ? (
         <View>
-          <Text style={styles.caption}>{JSON.stringify(credential)}</Text>
-          <Text style={styles.caption}>
-            Secret: {JSON.stringify(credentialSecret)}
-          </Text>
-          <Button label="Delete credential" onPress={handleDeleteCredential} />
+          <View style={{ flexGrow: 1 }}>
+            <Text style={styles.credentialId}>
+              {credential.identityCommitment
+                .substring(
+                  credential.identityCommitment.length - 10,
+                  credential.identityCommitment.length
+                )
+                .toLocaleUpperCase()}
+            </Text>
+
+            {credential.status === CredentialStatus.Verified ? (
+              <View style={styles.verificationIndicator}>
+                <FontAwesome5 size={18} name="check-circle" color={success} />
+                <Text
+                  style={{
+                    color: success,
+                    ...styles.verificationIndicatorText,
+                  }}
+                >
+                  Verified
+                </Text>
+              </View>
+            ) : (
+              <View style={styles.verificationIndicator}>
+                <FontAwesome5 size={18} name="times-circle" color={danger} />
+                <Text
+                  style={{
+                    color: danger,
+                    ...styles.verificationIndicatorText,
+                  }}
+                >
+                  Nov Verified
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={{ paddingBottom: 128 }}>
+            <Button
+              label="Delete credential"
+              onPress={handleDeleteCredential}
+            />
+          </View>
         </View>
       ) : (
         <View style={styles.noCredentialContainer}>

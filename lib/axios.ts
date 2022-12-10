@@ -1,7 +1,8 @@
 import axios from "axios";
 import Toast from "react-native-toast-message";
+import { API_URL } from "../const";
 
-export const internalAxios = axios.create();
+export const internalAxios = axios.create({ baseURL: API_URL });
 internalAxios.interceptors.response.use(
   (response) => response,
   (error) => {

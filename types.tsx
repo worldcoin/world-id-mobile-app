@@ -16,6 +16,8 @@ export enum Credentials {
 export enum CredentialStatus {
   Created = "created",
   Verified = "verified",
+  Errored = "errored",
+  Revoked = "revoked", // Removed from remote server
 }
 
 export interface ZKPRequest {
@@ -27,11 +29,11 @@ export interface ZKPRequest {
 export interface ICredential {
   type: Credentials;
   status: CredentialStatus;
+  error_details?: string; // Remote error details registering a credential (e.g. phone number already registered)
   identityCommitment: string; // Semaphore identity
   identityNullifier: string; // Semaphore identity
   identityTrapdoor: string; // Semaphore identity
 }
-
 export interface ICredentialSecret {
   type: Credentials;
   identitySecret: string;
