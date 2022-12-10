@@ -12,15 +12,22 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
+import { ColorSchemeName, Image } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import ModalScreen from "../screens/ModalScreen";
+import AppsScreen from "../screens/AppsScreen";
+import CredentialScreen from "../screens/CredentialScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import WorldIDScreen from "../screens/WorldIDScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+
+// Tab bar icons
+const CredentialsIcon = require(`../assets/images/credentials.png`);
+const CredentialsIconFocused = require(`../assets/images/credentials-focused.png`);
+const AppsIcon = require(`../assets/images/apps.png`);
+const AppsIconFocused = require(`../assets/images/apps-focused.png`);
 
 export default function Navigation({
   colorScheme,
@@ -56,8 +63,13 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+      <Stack.Group
+        screenOptions={{
+          presentation: "modal",
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Credential" component={CredentialScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -82,19 +94,39 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="WorldID"
         component={WorldIDScreen}
-        options={{ headerShown: false }}
-      />
-      {/* <BottomTab.Screen
-        name="Settings"
-        component={TabTwoScreen}
         options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          title: "",
+          tabBarIcon: ({ focused }) => (
+            <Image
+              style={tabIconStyle}
+              source={focused ? CredentialsIconFocused : CredentialsIcon}
+            />
+          ),
         }}
-      /> */}
+      />
+      <BottomTab.Screen
+        name="Apps"
+        component={AppsScreen}
+        options={{
+          title: "",
+          tabBarIcon: ({ focused }) => (
+            <Image
+              style={tabIconStyle}
+              source={focused ? AppsIconFocused : AppsIcon}
+            />
+          ),
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
+
+const tabIconStyle = {
+  width: 24,
+  height: 24,
+  marginTop: 18,
+};
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
