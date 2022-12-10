@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode } from "react";
 import { StyleSheet, View, Pressable } from "react-native";
-import { gradientEnd, gradientStart, white } from "../constants/Colors";
+import { gradientEnd, gradientStart } from "../constants/Colors";
 import { fontMd } from "../constants/Styles";
 import { LinearGradientText } from "./LinearGradientText";
 import { useThemeColor } from "./Themed";

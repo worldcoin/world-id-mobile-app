@@ -1,17 +1,25 @@
 import { FontAwesome5 } from "@expo/vector-icons";
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import { grayDark1, textSecondary, white } from "../constants/Colors";
+import { StyleSheet, Pressable } from "react-native";
+import { grayDark1, textSecondary } from "../constants/Colors";
 import { borderRadius, elevation5 } from "../constants/Styles";
+import useColorScheme from "../hooks/useColorScheme";
+import { Text, View } from "./Themed";
+import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: white,
+    backgroundColor: Colors.light.background,
     borderRadius: borderRadius,
     paddingVertical: 24,
     paddingHorizontal: 16,
     flexDirection: "row",
     marginBottom: 16,
     ...elevation5,
+  },
+  cardDarkMode: {
+    backgroundColor: Colors.dark.background,
+    borderWidth: 1,
+    borderColor: textSecondary,
   },
   disabledCard: {
     opacity: 0.5,
@@ -24,6 +32,9 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  moreDetailsButtonDarkMode: {
+    backgroundColor: "#414345",
   },
   centered: {
     alignItems: "center",
@@ -46,9 +57,14 @@ export function CredentialCard({
   disabled,
   onPress,
 }: ICredentialCardProps) {
+  const theme = useColorScheme();
   return (
     <Pressable
-      style={[styles.card, disabled ? styles.disabledCard : null]}
+      style={[
+        styles.card,
+        disabled && styles.disabledCard,
+        theme === "dark" && styles.cardDarkMode,
+      ]}
       onPress={() => !disabled && onPress?.()}
     >
       <View style={styles.centered}>
@@ -64,7 +80,12 @@ export function CredentialCard({
         <Text style={{ color: textSecondary }}>{caption}</Text>
       </View>
       <View style={styles.centered}>
-        <View style={styles.moreDetailsButton}>
+        <View
+          style={[
+            styles.moreDetailsButton,
+            theme === "dark" && styles.moreDetailsButtonDarkMode,
+          ]}
+        >
           <FontAwesome5 size={12} name="chevron-right" color={textSecondary} />
         </View>
       </View>
