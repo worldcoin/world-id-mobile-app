@@ -13,6 +13,7 @@ import {
   deleteCredentialSecret,
 } from "../store/secureSlice";
 import { startLegalIdentity } from "../logic/legalIdentityLogic";
+import Toast from "react-native-toast-message";
 
 const styles = StyleSheet.create({
   container: {
@@ -62,8 +63,13 @@ export default function CredentialScreen({
     dispatch(appendCredentialSecret({ credentialSecret }));
 
     // TODO: Move to more maintainable logic
-    const url = await startLegalIdentity(credential.identityCommitment);
-    Linking.openURL(url);
+    const url = await startLegalIdentity(
+      credential.identityCommitment,
+      credentialType
+    );
+    if (url) {
+      Linking.openURL(url);
+    }
   };
 
   const handleDeleteCredential = () => {
@@ -104,6 +110,9 @@ export default function CredentialScreen({
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+
+      {/* https://github.com/calintamas/react-native-toast-message/blob/main/docs/modal-usage.md */}
+      <Toast position="bottom" />
     </View>
   );
 }

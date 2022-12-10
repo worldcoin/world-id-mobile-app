@@ -8,6 +8,7 @@ import Navigation from "./navigation";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,6 +23,7 @@ export default function App() {
           <PersistGate loading={null} persistor={persistor}>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
+            <Toast position="bottom" />
           </PersistGate>
         </Provider>
       </SafeAreaProvider>
