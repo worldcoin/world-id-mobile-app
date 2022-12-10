@@ -1,5 +1,5 @@
 import { FontAwesome5 } from "@expo/vector-icons";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import {
   borderRadius,
   elevation5,
@@ -41,6 +41,7 @@ interface ICredentialCardProps {
   caption: string;
   icon: string;
   disabled?: boolean;
+  onPress?: () => void;
 }
 
 export function CredentialCard({
@@ -48,9 +49,13 @@ export function CredentialCard({
   caption,
   icon,
   disabled,
+  onPress,
 }: ICredentialCardProps) {
   return (
-    <View style={[styles.card, disabled ? styles.disabledCard : null]}>
+    <Pressable
+      style={[styles.card, disabled ? styles.disabledCard : null]}
+      onPress={() => !disabled && onPress?.()}
+    >
       <View style={styles.centered}>
         <FontAwesome5
           size={20}
@@ -68,6 +73,6 @@ export function CredentialCard({
           <FontAwesome5 size={12} name="chevron-right" color={textSecondary} />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
