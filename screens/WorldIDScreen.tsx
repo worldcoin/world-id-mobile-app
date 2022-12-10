@@ -133,17 +133,18 @@ export default function WorldIDScreen({
               onPress={handleKYCCardPress}
             />
             <CredentialCard
-              name="Phone number"
-              caption="Coming soon"
-              icon="phone-square"
-              disabled
-            />
-            <CredentialCard
               name="Orb by Worldcoin"
               caption="Coming soon"
               icon="user-check"
               disabled
             />
+            <CredentialCard
+              name="Phone number"
+              caption="Coming soon"
+              icon="phone-square"
+              disabled
+            />
+
             <CredentialCard
               name="Device"
               caption="Coming soon"
