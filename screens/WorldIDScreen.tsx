@@ -21,7 +21,7 @@ import {
   textSecondary,
   white,
 } from "../styles";
-import { RootTabScreenProps } from "../types";
+import { Credentials, RootTabScreenProps } from "../types";
 const constellation = require("../assets/images/constellation.png");
 const profilePicPolygon = require("../assets/images/profile-pic-polygon.png");
 const scanQRIcon = require("../assets/images/scan-qr-icon.png");
@@ -90,8 +90,11 @@ export default function WorldIDScreen({
 }: RootTabScreenProps<"WorldID">) {
   // TODO: Move to more maintainable logic location
   const handleKYCCardPress = async () => {
-    const url = await getDockCheckUrl("0x123");
-    Linking.openURL(url);
+    // const url = await getDockCheckUrl("0x123");
+    // Linking.openURL(url);
+    navigation.push("Credential", {
+      credentialType: Credentials.Identity,
+    });
   };
 
   return (
