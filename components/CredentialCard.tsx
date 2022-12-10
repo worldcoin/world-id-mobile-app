@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
   disabledCard: {
     opacity: 0.5,
   },
+  disabledCardDarkMode: {
+    backgroundColor: "#414345",
+  },
   moreDetailsButton: {
     backgroundColor: grayDark1,
     height: 24,
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
   centered: {
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "transparent",
   },
 });
 
@@ -64,6 +68,7 @@ export function CredentialCard({
         styles.card,
         disabled && styles.disabledCard,
         theme === "dark" && styles.cardDarkMode,
+        theme === "dark" && disabled && styles.disabledCardDarkMode,
       ]}
       onPress={() => !disabled && onPress?.()}
     >
@@ -75,7 +80,7 @@ export function CredentialCard({
           color={textSecondary}
         />
       </View>
-      <View style={{ flexGrow: 1 }}>
+      <View style={{ flexGrow: 1, backgroundColor: "transparent" }}>
         <Text style={{ fontWeight: "bold" }}>{name}</Text>
         <Text style={{ color: textSecondary }}>{caption}</Text>
       </View>
