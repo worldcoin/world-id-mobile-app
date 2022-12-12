@@ -19,6 +19,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import AppsScreen from "../screens/AppsScreen";
 import CredentialScreen from "../screens/CredentialScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import QRScannerScreen from "../screens/QRScannerScreen";
 import WorldIDScreen from "../screens/WorldIDScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -70,6 +71,7 @@ function RootNavigator() {
         }}
       >
         <Stack.Screen name="Credential" component={CredentialScreen} />
+        <Stack.Screen name="QRScanner" component={QRScannerScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

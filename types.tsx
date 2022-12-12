@@ -41,8 +41,8 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Credential: RootTabParamList["Credential"];
-  Apps: undefined;
   NotFound: undefined;
+  QRScanner: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -51,6 +51,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   WorldID: undefined;
   Apps: undefined;
+  QRScanner: undefined;
   Credential: { credentialType: Credentials };
 };
 

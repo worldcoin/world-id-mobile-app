@@ -79,6 +79,10 @@ export default function WorldIDScreen({
     });
   };
 
+  const handleScanQRCodeButton = async () => {
+    navigation.push("QRScanner");
+  };
+
   return (
     <View style={styles.container} lightColor="#000" darkColor="#000">
       <ImageBackground
@@ -106,7 +110,7 @@ export default function WorldIDScreen({
         <View style={{ paddingHorizontal: 32 }}>
           <GradientButton
             label="Scan QR code"
-            onPress={() => {}}
+            onPress={handleScanQRCodeButton}
             image={
               <Image
                 source={scanQRIcon}
