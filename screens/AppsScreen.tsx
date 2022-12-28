@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    paddingHorizontal: 32,
+    textAlign: "center",
   },
   separator: {
     marginVertical: 30,

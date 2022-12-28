@@ -22,7 +22,6 @@ export const createCredential = async (
     Crypto.CryptoDigestAlgorithm.SHA256,
     Random.getRandomBytes(32).toString()
   );
-  console.log(seed);
   let identityCommitment = "";
 
   if (Semaphore) {

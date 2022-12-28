@@ -9,7 +9,6 @@ import {
 } from "../store/credentialsSlice";
 import Button from "../components/Button";
 import { fontLg, fontMd, h1Style } from "../constants/Styles";
-import { CREDENTIALS_LABELS } from "../const";
 import { createCredential, registerCredential } from "../logic/credentialLogic";
 import {
   appendCredentialSecret,
@@ -21,6 +20,7 @@ import Tag from "../components/Tag";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { danger, success, textSecondary } from "../constants/Colors";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
+import { CREDENTIALS_LABELS } from "../constants/Localized";
 
 const styles = StyleSheet.create({
   container: {
