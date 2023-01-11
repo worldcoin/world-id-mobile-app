@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import {
+  Image,
   ImageBackground,
+  Platform,
   ScrollView,
   StyleSheet,
-  Image,
-  Platform,
 } from "react-native";
 import { CredentialCard } from "../components/CredentialCard";
 import GradientButton from "../components/GradientButton";
@@ -79,6 +79,10 @@ export default function WorldIDScreen({
     });
   };
 
+  const handlePhoneCardPress = async () => {
+    navigation.push("Phone");
+  };
+
   return (
     <View style={styles.container} lightColor="#000" darkColor="#000">
       <ImageBackground
@@ -133,18 +137,17 @@ export default function WorldIDScreen({
               onPress={handleKYCCardPress}
             />
             <CredentialCard
+              name="Phone number"
+              caption="Validate your phone number"
+              icon="phone-square"
+              onPress={handlePhoneCardPress}
+            />
+            <CredentialCard
               name="Orb by Worldcoin"
               caption="Coming soon"
               icon="user-check"
               disabled
             />
-            <CredentialCard
-              name="Phone number"
-              caption="Coming soon"
-              icon="phone-square"
-              disabled
-            />
-
             <CredentialCard
               name="Device"
               caption="Coming soon"
