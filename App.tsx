@@ -2,13 +2,17 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import Toast from "react-native-toast-message";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { Provider } from "react-redux";
 import { persistor, store } from "./store";
-import { PersistGate } from "redux-persist/integration/react";
-import Toast from "react-native-toast-message";
+
+// Set up tailwind-rn
+import { TailwindProvider } from "tailwind-rn";
+import utilities from "./tailwind.json";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,15 +22,18 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
-            <Toast position="bottom" />
-          </PersistGate>
-        </Provider>
-      </SafeAreaProvider>
+      // @ts-ignore: https://github.com/vadimdemedes/tailwind-rn/issues/169
+      <TailwindProvider utilities={utilities}>
+        <SafeAreaProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+              <Toast position="bottom" />
+            </PersistGate>
+          </Provider>
+        </SafeAreaProvider>
+      </TailwindProvider>
     );
   }
 }

@@ -6,9 +6,9 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
-  NavigationContainer,
-  DefaultTheme,
   DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
@@ -19,6 +19,8 @@ import useColorScheme from "../hooks/useColorScheme";
 import AppsScreen from "../screens/AppsScreen";
 import CredentialScreen from "../screens/CredentialScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import OTPScreen from "../screens/OTPScreen";
+import PhoneScreen from "../screens/PhoneScreen";
 import WorldIDScreen from "../screens/WorldIDScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -70,6 +72,12 @@ function RootNavigator() {
         }}
       >
         <Stack.Screen name="Credential" component={CredentialScreen} />
+        <Stack.Screen name="Phone" component={PhoneScreen} />
+        <Stack.Screen
+          name="OTP"
+          component={OTPScreen}
+          initialParams={{ phoneNumber: "" }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
