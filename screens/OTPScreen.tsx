@@ -21,8 +21,6 @@ export default function OTPScreen({
   const [isReady, setIsReady] = useState(false);
   const inputRef = useRef<TextInput>();
 
-  // const { phoneNumber } = route.params;
-
   const handleGoBack = () => {
     navigation.dispatch(CommonActions.goBack());
   };
